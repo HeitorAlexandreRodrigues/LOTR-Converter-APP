@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var showExchangeInfo = false
+    @State var leftAmount = ""
+    @State var rightAmount = ""
     var body: some View {
         ZStack {
             //background Image
@@ -44,9 +46,10 @@ struct ContentView: View {
                                 .font(.headline)
                                 .foregroundStyle(Color.white)
                         }
+                        .padding(.bottom,-5)
                         //text field
-                        Text("Text field")
-                            .foregroundStyle(.pink)
+                        TextField("Amount :", text: $leftAmount)
+                            .textFieldStyle(.roundedBorder)
                     }
                     //equal sign
                     Image(systemName: "equal")
@@ -69,18 +72,27 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .frame(height: 33)
                         }
-                        Text("Text field")
-                            .foregroundStyle(Color.pink)
+                        .padding(.bottom,-5)
+                        TextField("Amount : ", text: $rightAmount)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
                     }
                 }
+                .padding()
+                .background(.black.opacity(0.5))
+                .clipShape(.capsule)
                 //info button
                 Spacer()
-                Button {    
-                    showExchangeInfo = true
-                } label: {
-                    Image(systemName: "info.circle.fill")
-                        .font(.largeTitle)
-                        .foregroundStyle(.white)
+                HStack {
+                    Spacer()
+                    Button {
+                        showExchangeInfo.toggle()
+                    } label: {
+                        Image(systemName: "info.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                    }
+                    .padding(.trailing)
                 }
                 
             }
